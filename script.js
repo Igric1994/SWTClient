@@ -74,17 +74,6 @@ document.querySelector('.filters-toggle').addEventListener('click', function() {
     this.textContent = dropdown.classList.contains('active') ? 'Фильтры ▲' : 'Фильтры ▼';
 });
 
-/*
-// Обработка кнопки поиска (заглушка)
-document.querySelector('.search-button').addEventListener('click', function() {
-    const query = document.querySelector('.search-input').value;
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    const filters = Array.from(checkboxes).map(cb => cb.value);
-    
-    console.log('Поиск:', query, 'Фильтры:', filters);
-    alert(`Ищем: "${query}" с фильтрами: ${filters.join(', ')}`);
-});*/
-
 // Пример функции для отображения результатов
 function displayResults(results) {
     const container = document.querySelector('.search-results');
@@ -151,38 +140,3 @@ document.querySelector('.search-button').addEventListener('click', function() {
     
     displayResults(mockResults);
 });
-
-// Показ нужного tab-content
-function showTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    document.getElementById(tabId).classList.add('active');
-}
-
-// Показ результатов поиска
-function showResults() {
-    const results = document.querySelectorAll('.torrent-item');
-    results.forEach(item => {
-        item.classList.add('active');
-    });
-}
-
-
-// Очистка поля ввода
-const searchInput = document.querySelector('.search-input');
-const clearInput = document.querySelector('.clear-input');
-
-// searchInput.addEventListener('input', function() {
-//     // Показываем/скрываем крестик в зависимости от наличия текста
-//     clearInput.style.display = this.value ? 'inline' : 'none';
-//     // alert(this.value ? 'block' : 'none');
-// });
-
-// clearInput.addEventListener('click', function() {
-//     searchInput.value = '';
-//     clearInput.style.display = 'none';
-//     searchInput.focus();
-// });
-
-// Очистка результатов поиска
