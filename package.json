@@ -4,6 +4,7 @@
   "description": "Первая проба торрент клиента для дисплома",
   "main": "index.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Igric1994/SWTClient/issues"
   },
-  "homepage": "https://github.com/Igric1994/SWTClient#readme"
+  "homepage": "https://github.com/Igric1994/SWTClient#readme",
+  "devDependencies": {
+    "electron": "^35.1.5"
+  }
 }

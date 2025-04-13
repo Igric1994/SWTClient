@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torrent Manager</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="tab-button active" data-tab="downloads">Загрузки</button>
+            <button class="tab-button" data-tab="search">Поиск торрентов</button>
+            <div class="tab-indicator"></div>
+        </header>
+
+        <main class="content">
+            <div class="tab-content active" id="downloads">
+                <h2>Загрузки</h2>
+                <p>Здесь будет отображаться список ваших загрузок...</p>
+            </div>
+            <div class="tab-content" id="search">
+                <h2>Поиск торрентов</h2>
+                
+                <!-- Строка поиска -->
+                <div class="search-bar">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            placeholder="Введите название торрента..."
+                        >
+                        <span class="clear-input">&times;</span>
+                    </div>
+                    <button class="search-button">Поиск</button>
+                </div>
+            
+                <!-- Выпадающий блок фильтров -->
+                <div class="filters-toggle">Фильтры ▼</div>
+                
+                <div class="filters-dropdown">
+                    <div class="filter-group">
+                        <h3>Категории</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="movies"> Фильмы
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="games"> Игры
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="music"> Музыка
+                        </label>
+                    </div>
+            
+                    <div class="filter-group">
+                        <h3>Дополнительно</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="sort" value="popular"> Только популярные
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="sort" value="verified"> Только проверенные
+                        </label>
+                    </div>
+
+                    <button class="clear-filters">Сбросить фильтры</button>
+                </div>
+
+                <div class="results-header">
+                    <h3>Результаты поиска</h3>
+                    <button class="clear-results">Очистить</button>
+                </div>
+            
+                <div id="search-content">
+                    <!-- ... (строка поиска и фильтры остаются без изменений) ... -->
+                
+                    <!-- Контейнер результатов поиска -->
+                    <div class="search-results">
+                        
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
