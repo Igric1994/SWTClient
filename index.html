@@ -9,15 +9,56 @@
 <body>
     <div class="container">
         <header class="header">
-            <button class="tab-button active" data-tab="downloads">Загрузки</button>
-            <button class="tab-button" data-tab="search">Поиск торрентов</button>
+            <button id="but-window-switch-download" class="tab-button active" data-tab="downloads">Загрузки</button>
+            <button  id="but-window-switch-search" class="tab-button" data-tab="search">Поиск торрентов</button>
             <div class="tab-indicator"></div>
         </header>
 
         <main class="content">
             <div class="tab-content active" id="downloads">
-                <h2>Загрузки</h2>
-                <p>Здесь будет отображаться список ваших загрузок...</p>
+                <h2>Активные загрузки</h2>
+                
+                <div class="downloads-container">
+                    <!-- Пример элемента загрузки -->
+                    <div class="download-item">
+                        <div class="download-header">
+                            <h3 class="download-title">Ubuntu 22.04 LTS Desktop</h3>
+                            <span class="download-status downloading">Скачивание</span>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 65%"></div>
+                            <span class="progress-text">65%</span>
+                        </div>
+                        
+                        <div class="download-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Скорость:</span>
+                                <span class="stat-value">3.2 MB/s</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Осталось:</span>
+                                <span class="stat-value">~12 мин</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Сиды:</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Пиры:</span>
+                                <span class="stat-value">8</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Личи:</span>
+                                <span class="stat-value">3</span>
+                            </div>
+                        </div>
+                        
+                        <button class="pause-button">Пауза</button>
+                    </div>
+                    
+                    <!-- Другие элементы загрузки -->
+                </div>
             </div>
             <div class="tab-content" id="search">
                 <h2>Поиск торрентов</h2>

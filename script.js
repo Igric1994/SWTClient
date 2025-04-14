@@ -95,9 +95,22 @@ function displayResults(results) {
                 <span class="torrent-stat"><strong>Размер:</strong> ${torrent.size}</span>
                 <span class="torrent-stat"><strong>Дата:</strong> ${torrent.date}</span>
             </div>
-            <button class="torrent-download" data-magnet="${torrent.magnet}">Скачать</button>
+            
         `;
+
+        const dowButton = document.createElement('button');
+        dowButton.className = 'torrent-download';
+        dowButton.setAttribute('data-magnet', torrent.magnet);
+        dowButton.setAttribute('data-torrent-name', torrent.name);
+        dowButton.innerText = 'Скачать';
+        dowButton.addEventListener('click', () => {
+            addDownload(dowButton.dataset.torrentName, dowButton.dataset.magnet);
+            document.getElementById('but-window-switch-download').click();
+        })
+        item.append(dowButton);
+
         container.appendChild(item);
+
     });
     
     // Добавляем обработчики для кнопок скачивания
@@ -140,3 +153,92 @@ document.querySelector('.search-button').addEventListener('click', function() {
     
     displayResults(mockResults);
 });
+
+
+// Пример функции для обновления загрузок
+function updateDownload(downloadId, progress, speed, peers, seeds, leechers, timeLeft) {
+    const item = document.querySelector(`#download-${downloadId}`);
+    if (item) {
+        // Обновляем прогресс
+        item.querySelector('.progress-bar').style.width = `${progress}%`;
+        item.querySelector('.progress-text').textContent = `${progress}%`;
+        
+        // Обновляем статистику
+        item.querySelector('.stat-value:nth-child(1)').textContent = speed;
+        item.querySelector('.stat-value:nth-child(2)').textContent = timeLeft;
+        item.querySelector('.stat-value:nth-child(3)').textContent = seeds;
+        item.querySelector('.stat-value:nth-child(4)').textContent = peers;
+        item.querySelector('.stat-value:nth-child(5)').textContent = leechers;
+    }
+}
+
+// Пример добавления новой загрузки
+function addDownload(torrentName, magnet,  status = 'searching') {
+    const container = document.querySelector('.downloads-container');
+
+    const downloadId = generateDownloadId(torrentName);
+    
+    // Проверяем, нет ли уже такой загрузки
+    if (document.getElementById(`download-${downloadId}`)) {
+        console.warn(`Загрузка "${torrentName}" уже существует!`);
+        return null;
+    }
+
+    console.log(`Start downloading torrent with magnet link ${magnet}`);
+
+    const newItem = document.createElement('div');
+    newItem.className = 'download-item';
+    newItem.id = `downloadId`;
+    newItem.innerHTML = `
+        <div class="download-header">
+            <h3 class="download-title">${torrentName}</h3>
+            <span class="download-status ${status}">${getStatusText(status)}</span>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" style="width: 0%"></div>
+            <span class="progress-text">0%</span>
+        </div>
+        <div class="download-stats">
+            <div class="stat-item">
+                <span class="stat-label">Скорость:</span>
+                <span class="stat-value">0 KB/s</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Осталось:</span>
+                <span class="stat-value">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Сиды:</span>
+                <span class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Пиры:</span>
+                <span class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Личи:</span>
+                <span class="stat-value">0</span>
+            </div>
+        </div>
+        <button class="pause-button">Пауза</button>
+    `;
+    container.prepend(newItem);
+}
+
+function generateDownloadId(torrentName) {
+    // Удаляем спецсимволы и приводим к нижнему регистру
+    const cleanName = torrentName.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    // Добавляем временную метку и случайное число
+    return `${cleanName}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+}
+
+function getStatusText(status) {
+    const statusMap = {
+        'searching': 'Поиск пиров',
+        'downloading': 'Скачивание',
+        'seeding': 'Раздача'
+    };
+    return statusMap[status] || status;
+}
+
+
